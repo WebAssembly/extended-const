@@ -5,8 +5,8 @@
   <title>WebAssembly JavaScript Interface</title>
   <meta content="ED" name="w3c-status">
   <meta content="Bikeshed version afdea9b3f, updated Fri Oct 21 14:30:36 2022 -0700" name="generator">
-  <link href="https://www.w3.org/TR/wasm-js-api-1/" rel="canonical">
-  <meta content="0493e50be45301c703af9b1926b81c3f2eced81e" name="document-revision">
+  <link href="https://www.w3.org/TR/wasm-js-api-2/" rel="canonical">
+  <meta content="42e320109928d68c58d83de80b0b8c3fad3fd193" name="document-revision">
 <style>
 emu-const {
     font-family: serif;
@@ -303,7 +303,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">WebAssembly JavaScript Interface</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-10-24">24 October 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2022-10-25">25 October 2022</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -311,13 +311,13 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
       <dt>This version:
       <dd><a class="u-url" href="https://webassembly.github.io/spec/js-api/">https://webassembly.github.io/spec/js-api/</a>
       <dt>Latest published version:
-      <dd><a href="https://www.w3.org/TR/wasm-js-api-1/">https://www.w3.org/TR/wasm-js-api-1/</a>
+      <dd><a href="https://www.w3.org/TR/wasm-js-api-2/">https://www.w3.org/TR/wasm-js-api-2/</a>
       <dt>Feedback:
       <dd><a href="#issues-index">Inline In Spec</a>
       <dt class="editor">Editor:
       <dd class="editor p-author h-card vcard"><span class="p-name fn">Ms2ger</span> (<span class="p-org org">Igalia</span>)
       <dt>Issue Tracking:
-      <dd><a href="https://github.com/WebAssembly/spec/labels/wasm-js-api-1">GitHub Issues</a>
+      <dd><a href="https://github.com/WebAssembly/spec/labels/wasm-js-api-2">GitHub Issues</a>
      </dl>
     </div>
    </details>
@@ -565,11 +565,11 @@ This mapping is used to ensure that, for a given <a data-link-type="dfn" href="h
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate">For each</a> (<var>moduleName</var>, <var>componentName</var>, <var>externtype</var>) of <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-module-imports" id="ref-for-embed-module-imports">module_imports</a>(<var>module</var>),</p>
       <ol>
        <li data-md>
-        <p>Let <var>o</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-get-o-p" id="ref-for-sec-get-o-p">Get</a>(<var>importObject</var>, <var>moduleName</var>).</p>
+        <p>Let <var>o</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-get-o-p" id="ref-for-sec-get-o-p">Get</a>(<var>importObject</var>, <var>moduleName</var>).</p>
        <li data-md>
         <p>If <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-ecmascript-data-types-and-values" id="ref-for-sec-ecmascript-data-types-and-values">Type</a>(<var>o</var>) is not Object, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror①">TypeError</a></code> exception.</p>
        <li data-md>
-        <p>Let <var>v</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-get-o-p" id="ref-for-sec-get-o-p①">Get</a>(<var>o</var>, <var>componentName</var>).</p>
+        <p>Let <var>v</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-get-o-p" id="ref-for-sec-get-o-p①">Get</a>(<var>o</var>, <var>componentName</var>).</p>
        <li data-md>
         <p>If <var>externtype</var> is of the form <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#external-types" id="ref-for-external-types">func</a> <var>functype</var>,</p>
         <ol>
@@ -678,7 +678,7 @@ The verification of WebAssembly type requirements is deferred to the
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="create-an-exports-object">create an exports object</dfn> from a WebAssembly module <var>module</var> and instance <var>instance</var>, perform the following steps: 
     <ol>
      <li data-md>
-      <p>Let <var>exportsObject</var> be ! <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-objectcreate" id="ref-for-sec-objectcreate">ObjectCreate</a>(null).</p>
+      <p>Let <var>exportsObject</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands②">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-objectcreate" id="ref-for-sec-objectcreate">ObjectCreate</a>(null).</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate①">For each</a> (<var>name</var>, <var>externtype</var>) of <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-module-exports" id="ref-for-embed-module-exports">module_exports</a>(<var>module</var>),</p>
       <ol>
@@ -735,13 +735,13 @@ The verification of WebAssembly type requirements is deferred to the
           <p>Let <var>value</var> be <var>table</var>.</p>
         </ol>
        <li data-md>
-        <p>Let <var>status</var> be ! <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-createdataproperty" id="ref-for-sec-createdataproperty">CreateDataProperty</a>(<var>exportsObject</var>, <var>name</var>, <var>value</var>).</p>
+        <p>Let <var>status</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands③">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-createdataproperty" id="ref-for-sec-createdataproperty">CreateDataProperty</a>(<var>exportsObject</var>, <var>name</var>, <var>value</var>).</p>
        <li data-md>
         <p class="assertion">Assert: <var>status</var> is true.</p>
       </ol>
       <p class="note" role="note"><span>Note:</span> the validity and uniqueness checks performed during <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/valid/modules.html#valid-module" id="ref-for-valid-module">WebAssembly module validation</a> ensure that each property name is valid and no properties are defined twice.</p>
      <li data-md>
-      <p>Perform ! <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-setintegritylevel" id="ref-for-sec-setintegritylevel">SetIntegrityLevel</a>(<var>exportsObject</var>, <code>"frozen"</code>).</p>
+      <p>Perform <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands④">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-setintegritylevel" id="ref-for-sec-setintegritylevel">SetIntegrityLevel</a>(<var>exportsObject</var>, <code>"frozen"</code>).</p>
      <li data-md>
       <p>Return <var>exportsObject</var>.</p>
     </ol>
@@ -981,7 +981,7 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
     </ol>
    </div>
    <div class="algorithm" data-algorithm="Module(bytes)" data-algorithm-for="Module">
-     The <dfn class="dfn-paneled idl-code" data-dfn-for="Module" data-dfn-type="constructor" data-export data-lt="Module(bytes)|constructor(bytes)" id="dom-module-module"><code>Module(<var>bytes</var>)</code></dfn> constructor, when invoked, performs the follwing steps: 
+     The <dfn class="dfn-paneled idl-code" data-dfn-for="Module" data-dfn-type="constructor" data-export data-lt="Module(bytes)|constructor(bytes)" id="dom-module-module"><code>Module(<var>bytes</var>)</code></dfn> constructor, when invoked, performs the following steps: 
     <ol>
      <li data-md>
       <p>Let <var>stableBytes</var> be a <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-get-buffer-source-copy" id="ref-for-dfn-get-buffer-source-copy③">copy of the bytes held by the buffer</a> <var>bytes</var>.</p>
@@ -1116,7 +1116,7 @@ If this throws an exception, catch it, <a data-link-type="dfn" href="https://web
      <li data-md>
       <p>Let <var>memory</var> be <var>map</var>[<var>memaddr</var>].</p>
      <li data-md>
-      <p>Perform ! <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-detacharraybuffer" id="ref-for-sec-detacharraybuffer">DetachArrayBuffer</a>(<var>memory</var>.[[BufferObject]], "WebAssembly.Memory").</p>
+      <p>Perform <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑤">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-detacharraybuffer" id="ref-for-sec-detacharraybuffer">DetachArrayBuffer</a>(<var>memory</var>.[[BufferObject]], "WebAssembly.Memory").</p>
      <li data-md>
       <p>Let <var>buffer</var> be the result of <a data-link-type="dfn" href="#create-a-memory-buffer" id="ref-for-create-a-memory-buffer①">creating a memory buffer</a> from <var>memaddr</var>.</p>
      <li data-md>
@@ -1247,10 +1247,10 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
       <p>Otherwise,</p>
       <ol>
        <li data-md>
-        <p>Let <var>ref</var> be ? <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue①">ToWebAssemblyValue</a>(<var>value</var>, <var>elementType</var>).</p>
+        <p>Let <var>ref</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑥">?</a> <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue①">ToWebAssemblyValue</a>(<var>value</var>, <var>elementType</var>).</p>
       </ol>
      <li data-md>
-      <p>Let <var>type</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype">table type</a> {<a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype①">min</a> <var>initial</var>, <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype②">ma𝗑</a> <var>maximum</var>} <var>elementType</var>.</p>
+      <p>Let <var>type</var> be the <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype">table type</a> {<a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype①">min</a> <var>initial</var>, <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-tabletype" id="ref-for-syntax-tabletype②">max</a> <var>maximum</var>} <var>elementType</var>.</p>
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#surrounding-agent" id="ref-for-surrounding-agent①③">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store⑧">associated store</a>.</p>
      <li data-md>
@@ -1282,7 +1282,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
       <p>Otherwise,</p>
       <ol>
        <li data-md>
-        <p>Let <var>ref</var> be ? <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue②">ToWebAssemblyValue</a>(<var>value</var>, <var>elementType</var>).</p>
+        <p>Let <var>ref</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑦">?</a> <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue②">ToWebAssemblyValue</a>(<var>value</var>, <var>elementType</var>).</p>
       </ol>
      <li data-md>
       <p>Let <var>result</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-table-grow" id="ref-for-embed-table-grow">table_grow</a>(<var>store</var>, <var>tableaddr</var>, <var>delta</var>, <var>ref</var>).</p>
@@ -1338,7 +1338,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
       <p>Otherwise,</p>
       <ol>
        <li data-md>
-        <p>Let <var>ref</var> be ? <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue③">ToWebAssemblyValue</a>(<var>value</var>, <var>elementType</var>).</p>
+        <p>Let <var>ref</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑧">?</a> <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue③">ToWebAssemblyValue</a>(<var>value</var>, <var>elementType</var>).</p>
       </ol>
      <li data-md>
       <p>Let <var>store</var> be the <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#surrounding-agent" id="ref-for-surrounding-agent①⑨">surrounding agent</a>'s <a data-link-type="dfn" href="#associated-store" id="ref-for-associated-store①④">associated store</a>.</p>
@@ -1462,7 +1462,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
       <p>If <var>valuetype</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①②">v128</a>,</p>
       <ol>
        <li data-md>
-        <p>Throw a <code class="idl"><a data-link-type="idl" href="#exceptiondef-linkerror" id="ref-for-exceptiondef-linkerror⑧">LinkError</a></code> exception.</p>
+        <p>Throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror③">TypeError</a></code> exception.</p>
       </ol>
      <li data-md>
       <p>If <var>v</var> is missing,</p>
@@ -1498,7 +1498,7 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
      <li data-md>
       <p>Let <var>globaltype</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-global-type" id="ref-for-embed-global-type">global_type</a>(<var>store</var>, <var>globaladdr</var>).</p>
      <li data-md>
-      <p>If <var>globaltype</var> is of the form <var>mut</var> <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①③">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror③">TypeError</a></code>.</p>
+      <p>If <var>globaltype</var> is of the form <var>mut</var> <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①③">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror④">TypeError</a></code>.</p>
      <li data-md>
       <p>Let <var>value</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-global-read" id="ref-for-embed-global-read">global_read</a>(<var>store</var>, <var>globaladdr</var>).</p>
      <li data-md>
@@ -1520,9 +1520,9 @@ Each <code class="idl"><a data-link-type="idl" href="#table" id="ref-for-table�
      <li data-md>
       <p>Let <var>mut</var> <var>valuetype</var> be <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/appendix/embedding.html#embed-global-type" id="ref-for-embed-global-type①">global_type</a>(<var>store</var>, <var>globaladdr</var>).</p>
      <li data-md>
-      <p>If <var>valuetype</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①④">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror④">TypeError</a></code>.</p>
+      <p>If <var>valuetype</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①④">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑤">TypeError</a></code>.</p>
      <li data-md>
-      <p>If <var>mut</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-mut" id="ref-for-syntax-mut③">const</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑤">TypeError</a></code>.</p>
+      <p>If <var>mut</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-mut" id="ref-for-syntax-mut③">const</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑥">TypeError</a></code>.</p>
      <li data-md>
       <p>Let <var>value</var> be <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue⑥">ToWebAssemblyValue</a>(<strong>the given value</strong>, <var>valuetype</var>).</p>
      <li data-md>
@@ -1570,7 +1570,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
         <p>Let <var>index</var> be the index of <var>moduleinst</var>.funcaddrs where <var>funcaddr</var> is found.</p>
       </ol>
      <li data-md>
-      <p>Return ! <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tostring" id="ref-for-sec-tostring">ToString</a>(<var>index</var>).</p>
+      <p>Return <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands⑨">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tostring" id="ref-for-sec-tostring">ToString</a>(<var>index</var>).</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="a new Exported Function">
@@ -1599,7 +1599,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
      <li data-md>
       <p>Let <var>name</var> be the <a data-link-type="dfn" href="#name-of-the-webassembly-function" id="ref-for-name-of-the-webassembly-function">name of the WebAssembly function</a> <var>funcaddr</var>.</p>
      <li data-md>
-      <p>Let <var>function</var> be <a data-link-type="dfn">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-createbuiltinfunction" id="ref-for-sec-createbuiltinfunction">CreateBuiltinFunction</a>(<var>steps</var>, <var>arity</var>, <var>name</var>, « [[FunctionAddress]] », <var>realm</var>).</p>
+      <p>Let <var>function</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⓪">!</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-createbuiltinfunction" id="ref-for-sec-createbuiltinfunction">CreateBuiltinFunction</a>(<var>steps</var>, <var>arity</var>, <var>name</var>, « [[FunctionAddress]] », <var>realm</var>).</p>
      <li data-md>
       <p>Set <var>function</var>.[[FunctionAddress]] to <var>funcaddr</var>.</p>
      <li data-md>
@@ -1618,7 +1618,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
      <li data-md>
       <p>Let [<var>parameters</var>] → [<var>results</var>] be <var>functype</var>.</p>
      <li data-md>
-      <p>If <var>parameters</var> or <var>results</var> contain <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①⑤">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑥">TypeError</a></code>.</p>
+      <p>If <var>parameters</var> or <var>results</var> contain <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①⑤">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑦">TypeError</a></code>.</p>
       <p class="note" role="note"><span>Note:</span> the above error is thrown each time the [[Call]] method is invoked.</p>
      <li data-md>
       <p>Let <var>args</var> be « ».</p>
@@ -1672,36 +1672,36 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
      <li data-md>
       <p>Let [<var>parameters</var>] → [<var>results</var>] be <var>functype</var>.</p>
      <li data-md>
-      <p>If <var>parameters</var> or <var>results</var> contain <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①⑥">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑦">TypeError</a></code>.</p>
+      <p>If <var>parameters</var> or <var>results</var> contain <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①⑥">v128</a>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑧">TypeError</a></code>.</p>
      <li data-md>
       <p>Let <var>jsArguments</var> be « ».</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate⑦">For each</a> <var>arg</var> of <var>arguments</var>,</p>
       <ol>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑨">Append</a> ! <a data-link-type="dfn" href="#tojsvalue" id="ref-for-tojsvalue④">ToJSValue</a>(<var>arg</var>) to <var>jsArguments</var>.</p>
+        <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-list-append⑨">Append</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①①">!</a> <a data-link-type="dfn" href="#tojsvalue" id="ref-for-tojsvalue④">ToJSValue</a>(<var>arg</var>) to <var>jsArguments</var>.</p>
       </ol>
      <li data-md>
-      <p>Let <var>ret</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-call" id="ref-for-sec-call">Call</a>(<var>func</var>, undefined, <var>jsArguments</var>).</p>
+      <p>Let <var>ret</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①②">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-call" id="ref-for-sec-call">Call</a>(<var>func</var>, undefined, <var>jsArguments</var>).</p>
      <li data-md>
       <p>Let <var>resultsSize</var> be <var>results</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size③">size</a>.</p>
      <li data-md>
       <p>If <var>resultsSize</var> is 0, return « ».</p>
      <li data-md>
-      <p>Otherwise, if <var>resultsSize</var> is 1, return « ? <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue⑧">ToWebAssemblyValue</a>(<var>ret</var>, <var>results</var>[0]) ».</p>
+      <p>Otherwise, if <var>resultsSize</var> is 1, return « <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①③">?</a> <a data-link-type="dfn" href="#towebassemblyvalue" id="ref-for-towebassemblyvalue⑧">ToWebAssemblyValue</a>(<var>ret</var>, <var>results</var>[0]) ».</p>
      <li data-md>
       <p>Otherwise,</p>
       <ol>
        <li data-md>
-        <p>Let <var>method</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-getmethod" id="ref-for-sec-getmethod">GetMethod</a>(<var>ret</var>, <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-well-known-symbols" id="ref-for-sec-well-known-symbols">@@iterator</a>).</p>
+        <p>Let <var>method</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①④">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-getmethod" id="ref-for-sec-getmethod">GetMethod</a>(<var>ret</var>, <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-well-known-symbols" id="ref-for-sec-well-known-symbols">@@iterator</a>).</p>
        <li data-md>
-        <p>If <var>method</var> is undefined, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑧">TypeError</a></code>.</p>
+        <p>If <var>method</var> is undefined, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw" id="ref-for-dfn-throw①">throw</a> a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑨">TypeError</a></code>.</p>
        <li data-md>
-        <p>Let <var>values</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-iterabletolist" id="ref-for-sec-iterabletolist">IterableToList</a>(<var>ret</var>, <var>method</var>).</p>
+        <p>Let <var>values</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑤">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-iterabletolist" id="ref-for-sec-iterabletolist">IterableToList</a>(<var>ret</var>, <var>method</var>).</p>
        <li data-md>
         <p>Let <var>wasmValues</var> be a new, empty <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list" id="ref-for-list③">list</a>.</p>
        <li data-md>
-        <p>If <var>values</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size④">size</a> is not <var>resultsSize</var>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror⑨">TypeError</a></code> exception.</p>
+        <p>If <var>values</var>’s <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size④">size</a> is not <var>resultsSize</var>, throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror①⓪">TypeError</a></code> exception.</p>
        <li data-md>
         <p>For each <var>value</var> and <var>resultType</var> in <var>values</var> and <var>results</var>, paired linearly,</p>
         <ol>
@@ -1802,7 +1802,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
       <p>If <var>type</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①⑧">i64</a>,</p>
       <ol>
        <li data-md>
-        <p>Let <var>i64</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tobigint64" id="ref-for-sec-tobigint64">ToBigInt64</a>(<var>v</var>).</p>
+        <p>Let <var>i64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑥">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tobigint64" id="ref-for-sec-tobigint64">ToBigInt64</a>(<var>v</var>).</p>
        <li data-md>
         <p>Return <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/runtime.html#values" id="ref-for-values①⑦">i64.const</a> <var>i64</var>.</p>
       </ol>
@@ -1810,7 +1810,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
       <p>If <var>type</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype①⑨">i32</a>,</p>
       <ol>
        <li data-md>
-        <p>Let <var>i32</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-toint32" id="ref-for-sec-toint32">ToInt32</a>(<var>v</var>).</p>
+        <p>Let <var>i32</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑦">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-toint32" id="ref-for-sec-toint32">ToInt32</a>(<var>v</var>).</p>
        <li data-md>
         <p>Return <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/runtime.html#values" id="ref-for-values①⑧">i32.const</a> <var>i32</var>.</p>
       </ol>
@@ -1818,7 +1818,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
       <p>If <var>type</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype②⓪">f32</a>,</p>
       <ol>
        <li data-md>
-        <p>Let <var>f32</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tonumber" id="ref-for-sec-tonumber">ToNumber</a>(<var>v</var>) rounded to the nearest representable value using IEEE 754-2008 round to nearest, ties to even mode.</p>
+        <p>Let <var>f32</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑧">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tonumber" id="ref-for-sec-tonumber">ToNumber</a>(<var>v</var>) rounded to the nearest representable value using IEEE 754-2008 round to nearest, ties to even mode.</p>
        <li data-md>
         <p>Return <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/runtime.html#values" id="ref-for-values①⑨">f32.const</a> <var>f32</var>.</p>
       </ol>
@@ -1826,7 +1826,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
       <p>If <var>type</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-numtype" id="ref-for-syntax-numtype②①">f64</a>,</p>
       <ol>
        <li data-md>
-        <p>Let <var>f64</var> be ? <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tonumber" id="ref-for-sec-tonumber①">ToNumber</a>(<var>v</var>).</p>
+        <p>Let <var>f64</var> be <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands①⑨">?</a> <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-tonumber" id="ref-for-sec-tonumber①">ToNumber</a>(<var>v</var>).</p>
        <li data-md>
         <p>Return <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/runtime.html#values" id="ref-for-values②⓪">f64.const</a> <var>f64</var>.</p>
       </ol>
@@ -1848,7 +1848,7 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
           <p>Return <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/exec/runtime.html#values" id="ref-for-values②②">ref.func</a> <var>funcaddr</var>.</p>
         </ol>
        <li data-md>
-        <p>Throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror①⓪">TypeError</a></code>.</p>
+        <p>Throw a <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror①①">TypeError</a></code>.</p>
       </ol>
      <li data-md>
       <p>If <var>type</var> is <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/types.html#syntax-reftype" id="ref-for-syntax-reftype⑧">externref</a>,</p>
@@ -1884,19 +1884,19 @@ This slot holds a <a data-link-type="dfn" href="https://webassembly.github.io/sp
      When the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-object" id="ref-for-dfn-namespace-object">namespace object</a> for the <code class="idl"><a data-link-type="idl" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly⑤">WebAssembly</a></code> namespace is <a data-link-type="dfn" href="https://heycam.github.io/webidl/#create-a-namespace-object" id="ref-for-create-a-namespace-object">created</a>, the following steps must be run: 
     <ol>
      <li data-md>
-      <p>Let <var>namespaceObject</var> the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-object" id="ref-for-dfn-namespace-object①">namespace object</a>.</p>
+      <p>Let <var>namespaceObject</var> be the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-object" id="ref-for-dfn-namespace-object①">namespace object</a>.</p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate⑧">For each</a> <var>error</var> of « "CompileError", "LinkError", "RuntimeError" »,</p>
       <ol>
        <li data-md>
         <p>Let <var>constructor</var> be a new object, implementing the <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-nativeerror-object-structure" id="ref-for-sec-nativeerror-object-structure">NativeError Object Structure</a>, with <var>NativeError</var> set to <var>error</var>.</p>
        <li data-md>
-        <p>! <a data-link-type="abstract-op" href="https://tc39.github.io/ecma262/#sec-createmethodproperty" id="ref-for-sec-createmethodproperty">CreateMethodProperty</a>(<var>namespaceObject</var>, <var>error</var>, <var>constructor</var>).</p>
+        <p><a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands" id="ref-for-sec-returnifabrupt-shorthands②⓪">!</a> <a data-link-type="abstract-op" href="https://tc39.github.io/ecma262/#sec-createmethodproperty" id="ref-for-sec-createmethodproperty">CreateMethodProperty</a>(<var>namespaceObject</var>, <var>error</var>, <var>constructor</var>).</p>
       </ol>
     </ol>
    </div>
-   <p class="note" role="note"><span>Note:</span> This defines <code class="idl"><a data-link-type="idl" href="#exceptiondef-compileerror" id="ref-for-exceptiondef-compileerror②">CompileError</a></code>, <code class="idl"><a data-link-type="idl" href="#exceptiondef-linkerror" id="ref-for-exceptiondef-linkerror⑨">LinkError</a></code>, and <code class="idl"><a data-link-type="idl" href="#exceptiondef-runtimeerror" id="ref-for-exceptiondef-runtimeerror②">RuntimeError</a></code> classes on the <code class="idl"><a data-link-type="idl" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly⑥">WebAssembly</a></code> namespace, which are produced by the APIs defined in this specification.
-They expose the same interface as native JavaScript errors like <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror①①">TypeError</a></code> and <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-rangeerror" id="ref-for-sec-native-error-types-used-in-this-standard-rangeerror⑧">RangeError</a></code>.</p>
+   <p class="note" role="note"><span>Note:</span> This defines <code class="idl"><a data-link-type="idl" href="#exceptiondef-compileerror" id="ref-for-exceptiondef-compileerror②">CompileError</a></code>, <code class="idl"><a data-link-type="idl" href="#exceptiondef-linkerror" id="ref-for-exceptiondef-linkerror⑧">LinkError</a></code>, and <code class="idl"><a data-link-type="idl" href="#exceptiondef-runtimeerror" id="ref-for-exceptiondef-runtimeerror②">RuntimeError</a></code> classes on the <code class="idl"><a data-link-type="idl" href="#namespacedef-webassembly" id="ref-for-namespacedef-webassembly⑥">WebAssembly</a></code> namespace, which are produced by the APIs defined in this specification.
+They expose the same interface as native JavaScript errors like <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-typeerror" id="ref-for-sec-native-error-types-used-in-this-standard-typeerror①②">TypeError</a></code> and <code class="idl"><a data-link-type="idl" href="https://tc39.github.io/ecma262/#sec-native-error-types-used-in-this-standard-rangeerror" id="ref-for-sec-native-error-types-used-in-this-standard-rangeerror⑧">RangeError</a></code>.</p>
    <p class="note" role="note"><span>Note:</span> It is not currently possible to define this behavior using Web IDL.</p>
    <h2 class="heading settled" data-level="5" id="errors"><span class="secno">5. </span><span class="content">Error Condition Mappings to JavaScript</span><a class="self-link" href="#errors"></a></h2>
    <p>Running WebAssembly programs encounter certain events which halt execution of the WebAssembly code.
@@ -1963,7 +1963,7 @@ In practice, an implementation may run out of resources for valid modules below 
    </ul>
    <h2 class="heading settled" data-level="7" id="security-considerations"><span class="secno">7. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-considerations"></a></h2>
    <p><em>This section is non-normative.</em></p>
-   <p>This document defines a host environment for WebAssembly. It enables a WebAssembly instance to <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/modules.html#syntax-import" id="ref-for-syntax-import">import</a> JavaScript objects and functions from an <a data-link-type="dfn" href="#read-the-imports" id="ref-for-read-the-imports③">import object</a>, but otherwise provides no access to the embedding environment. Thus a WebAssembly instance is bounds to the same constraints as JavaScript.</p>
+   <p>This document defines a host environment for WebAssembly. It enables a WebAssembly instance to <a data-link-type="dfn" href="https://webassembly.github.io/spec/core/syntax/modules.html#syntax-import" id="ref-for-syntax-import">import</a> JavaScript objects and functions from an <a data-link-type="dfn" href="#read-the-imports" id="ref-for-read-the-imports③">import object</a>, but otherwise provides no access to the embedding environment. Thus a WebAssembly instance is bound to the same constraints as JavaScript.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="w3c-conformance"><span class="content">Conformance</span><a class="self-link" href="#w3c-conformance"></a></h2>
@@ -2171,6 +2171,26 @@ In practice, an implementation may run out of resources for valid modules below 
    <li><a href="#namespacedef-webassembly">WebAssembly</a><span>, in § 4</span>
    <li><a href="#dictdef-webassemblyinstantiatedsource">WebAssemblyInstantiatedSource</a><span>, in § 4</span>
   </ul>
+  <aside class="dfn-panel" data-for="term-for-sec-returnifabrupt-shorthands">
+   <a href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands">https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands">4. The WebAssembly Namespace</a> <a href="#ref-for-sec-returnifabrupt-shorthands①">(2)</a> <a href="#ref-for-sec-returnifabrupt-shorthands②">(3)</a> <a href="#ref-for-sec-returnifabrupt-shorthands③">(4)</a> <a href="#ref-for-sec-returnifabrupt-shorthands④">(5)</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands⑤">4.3. Memories</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands⑥">4.4. Tables</a> <a href="#ref-for-sec-returnifabrupt-shorthands⑦">(2)</a> <a href="#ref-for-sec-returnifabrupt-shorthands⑧">(3)</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands⑨">4.6. Exported Functions</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⓪">(2)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①①">(3)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①②">(4)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①③">(5)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①④">(6)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑤">(7)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑥">(8)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑦">(9)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑧">(10)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑨">(11)</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands②⓪">4.7. Error Objects</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-sec-returnifabrupt-shorthands">
+   <a href="https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands">https://tc39.github.io/ecma262/#sec-returnifabrupt-shorthands</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands">4. The WebAssembly Namespace</a> <a href="#ref-for-sec-returnifabrupt-shorthands①">(2)</a> <a href="#ref-for-sec-returnifabrupt-shorthands②">(3)</a> <a href="#ref-for-sec-returnifabrupt-shorthands③">(4)</a> <a href="#ref-for-sec-returnifabrupt-shorthands④">(5)</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands⑤">4.3. Memories</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands⑥">4.4. Tables</a> <a href="#ref-for-sec-returnifabrupt-shorthands⑦">(2)</a> <a href="#ref-for-sec-returnifabrupt-shorthands⑧">(3)</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands⑨">4.6. Exported Functions</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⓪">(2)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①①">(3)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①②">(4)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①③">(5)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①④">(6)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑤">(7)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑥">(8)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑦">(9)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑧">(10)</a> <a href="#ref-for-sec-returnifabrupt-shorthands①⑨">(11)</a>
+    <li><a href="#ref-for-sec-returnifabrupt-shorthands②⓪">4.7. Error Objects</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-sec-well-known-symbols">
    <a href="https://tc39.github.io/ecma262/#sec-well-known-symbols">https://tc39.github.io/ecma262/#sec-well-known-symbols</a><b>Referenced in:</b>
    <ul>
@@ -2206,9 +2226,9 @@ In practice, an implementation may run out of resources for valid modules below 
    <ul>
     <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror">4. The WebAssembly Namespace</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror①">(2)</a>
     <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror②">4.4. Tables</a>
-    <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror③">4.5. Globals</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror④">(2)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑤">(3)</a>
-    <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑥">4.6. Exported Functions</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑦">(2)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑧">(3)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑨">(4)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror①⓪">(5)</a>
-    <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror①①">4.7. Error Objects</a>
+    <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror③">4.5. Globals</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror④">(2)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑤">(3)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑥">(4)</a>
+    <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑦">4.6. Exported Functions</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑧">(2)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror⑨">(3)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror①⓪">(4)</a> <a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror①①">(5)</a>
+    <li><a href="#ref-for-sec-native-error-types-used-in-this-standard-typeerror①②">4.7. Error Objects</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-agent">
@@ -3171,6 +3191,8 @@ In practice, an implementation may run out of resources for valid modules below 
    <li>
     <a data-link-type="biblio">[ECMASCRIPT]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-sec-returnifabrupt-shorthands">!</span>
+     <li><span class="dfn-paneled" id="term-for-sec-returnifabrupt-shorthands①">?</span>
      <li><span class="dfn-paneled" id="term-for-sec-well-known-symbols">@@iterator</span>
      <li><span class="dfn-paneled" id="term-for-sec-arraybuffer-objects">ArrayBuffer</span>
      <li><span class="dfn-paneled" id="term-for-sec-createmethodproperty">CreateMethodProperty</span>
@@ -4030,8 +4052,7 @@ In practice, an implementation may run out of resources for valid modules below 
    <b><a href="#exceptiondef-linkerror">#exceptiondef-linkerror</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-exceptiondef-linkerror">4. The WebAssembly Namespace</a> <a href="#ref-for-exceptiondef-linkerror①">(2)</a> <a href="#ref-for-exceptiondef-linkerror②">(3)</a> <a href="#ref-for-exceptiondef-linkerror③">(4)</a> <a href="#ref-for-exceptiondef-linkerror④">(5)</a> <a href="#ref-for-exceptiondef-linkerror⑤">(6)</a> <a href="#ref-for-exceptiondef-linkerror⑥">(7)</a> <a href="#ref-for-exceptiondef-linkerror⑦">(8)</a>
-    <li><a href="#ref-for-exceptiondef-linkerror⑧">4.5. Globals</a>
-    <li><a href="#ref-for-exceptiondef-linkerror⑨">4.7. Error Objects</a>
+    <li><a href="#ref-for-exceptiondef-linkerror⑧">4.7. Error Objects</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-runtimeerror">
