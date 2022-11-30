@@ -787,8 +787,11 @@ and instr_block' s es =
     instr_block' s ((e' @@ region s pos pos) :: es)
 
 let const s =
+  let size = if peek s = Some (0xc5) then (ignore (byte s); len32 s) else 0 in
+  let start = pos s in
   let c = at instr_block s in
   end_ s;
+  if size != 0 then require (pos s = start + size) s start "const expr size mismatch";
   c
 
 

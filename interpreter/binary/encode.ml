@@ -728,9 +728,18 @@ struct
     | VecReplace (V128 (F32x4 (V128Op.Replace i))) -> vecop 0x20l; byte i
     | VecReplace (V128 (F64x2 (V128Op.Replace i))) -> vecop 0x22l; byte i
 
-  let const c =
-    list instr c.it; end_ ()
 
+  let const c =
+    if List.length c.it > 1 then begin
+      op 0xc5;
+      let g = gap32 () in
+      let p = pos s in
+      list instr c.it;
+      end_ ();
+      patch_gap32 g (pos s - p)
+    end else begin
+      list instr c.it; end_ ()
+    end
 
   (* Sections *)
 
